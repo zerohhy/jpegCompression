@@ -21,8 +21,6 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
-
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
  
  
 public class JPEGtoRaw2 {

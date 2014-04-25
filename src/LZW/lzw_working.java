@@ -1,5 +1,6 @@
 package LZW;
-
+//referance: http://rosettacode.org/wiki/LZW_compression
+//referance: http://opencsv.sourceforge.net/
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -83,6 +84,28 @@ public class lzw_working {
 		return result.toString();
 	}
 
+	public static void printHexFile(String filename) throws IOException{
+	    FileInputStream in = new FileInputStream(filename);
+	    int read;
+	    while((read = in.read()) != -1){
+	        System.out.print(Integer.toHexString(read) + "|");
+	        System.out.print(read + "\t");
+	    }
+	    
+//	    FileInputStream in2 = new FileInputStream(filename);
+//	    int read2;
+//	    System.out.println();
+//	    while((read2 = in2.read()) != -1){
+//	    System.out.print(read2 + " ");
+//	    }
+	}
+	public void printBinaryFile(String filename) throws IOException{
+	    FileInputStream in = new FileInputStream(filename);
+	    int read;
+	    while((read = in.read()) != -1){
+	        System.out.print(Integer.toBinaryString(read) + "\t");
+	    }
+	}
 
 
 	public static void main(String[] args) throws IOException {
@@ -99,13 +122,16 @@ public class lzw_working {
 		System.out.println(dictionary_global);
 
 		
+		printHexFile(System.getProperty("user.dir") + "/data/large/puredark.jpg");
 		
+
 		
-		String fileName = System.getProperty("user.dir") + "/data/redCompressed.csv";
-		System.out.println("Getting raw RGBA components for " + fileName);
-		InputStream    fis;
-		BufferedReader br;
-		String         line;
+//		String fileName = System.getProperty("user.dir") + "/data/redCompressed.csv";
+//		String fileName = System.getProperty("user.dir") + "/data/movies/movie5.ser";
+//		System.out.println("Getting raw RGBA components for " + fileName);
+//		InputStream    fis;
+//		BufferedReader br;
+//		String         line;
 
 		
 		
@@ -126,50 +152,50 @@ public class lzw_working {
 	    
 	    
 //	line by line compression
-	    
-		fis = new FileInputStream(fileName);
-		br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
-		int i=0;
-		
-		int totalrawsize = 0;
-		int totalcompressedSize=0;
-		while ((line = br.readLine()) != null  && (i<100000000)) {
+//	    
+//		fis = new FileInputStream(fileName);
+//		br = new BufferedReader(new InputStreamReader(fis, Charset.forName("UTF-8")));
+//		int i=0;
+//		
+//		int totalrawsize = 0;
+//		int totalcompressedSize=0;
+//		while ((line = br.readLine()) != null  && (i<100000000)) {
 //			System.out.println("raw: "+line.toString());
-			i=i+1;
-			
-
-			
-			compressed = compress(line);
-			totalrawsize = totalrawsize + line.length()+1;
-			totalcompressedSize =totalcompressedSize + compressed.size() + 1;
-			
-			decompressed = decompress_all(compressed);
-			
-			
-			if(line.length()>100){
-				System.out.println("raw: "+line.toString());
-				System.out.println("totalrawsize: "+ totalrawsize);
-				System.out.println("totalcompressedSize: "+ totalcompressedSize);
-				System.out.println("compressed: "+compressed);
-				System.out.println("decompressed: "+decompressed);
-//				System.out.println(dictionary_global);
-			}
-			
-
-		}
-		System.out.println(dictionary_global);
-		System.out.println("\n");
-		System.out.println("totalrawsize: "+ totalrawsize + "bytes (this is equal to the actual file size)");
-		System.out.println("totalcompressedSize: "+ totalcompressedSize+ "bytes");
-		System.out.println("compresion dictionary Size: "+ dictionary_global.toString().length() + "bytes (useing worst case saving method)");
-		System.out.println("lzw size total = totalcompressedSize + compresion dictionary Size = "+(totalcompressedSize+dictionary_global.toString().length()));
-		System.out.print ("estimate compression ratio (lzw size total / totalrawsize ):" + ((totalcompressedSize+dictionary_global.toString().length())*100 / totalrawsize) + "%");
-		
-		// Done with the file
-		br.close();
-		br = null;
-		fis = null;
-
+//			i=i+1;
+//			
+//
+//			
+//			compressed = compress(line);
+//			totalrawsize = totalrawsize + line.length()+1;
+//			totalcompressedSize =totalcompressedSize + compressed.size() + 1;
+//			
+//			decompressed = decompress_all(compressed);
+//			
+//			
+//			if(line.length()>5){
+//				System.out.println("raw: "+line.toString());
+//				System.out.println("totalrawsize: "+ totalrawsize);
+//				System.out.println("totalcompressedSize: "+ totalcompressedSize);
+//				System.out.println("compressed: "+compressed);
+//				System.out.println("decompressed: "+decompressed);
+////				System.out.println(dictionary_global);
+//			}
+//			
+//
+//		}
+//		System.out.println(dictionary_global);
+//		System.out.println("\n");
+//		System.out.println("totalrawsize: "+ totalrawsize + "bytes (this is equal to the actual file size)");
+//		System.out.println("totalcompressedSize: "+ totalcompressedSize+ "bytes");
+//		System.out.println("compresion dictionary Size: "+ dictionary_global.toString().length() + "bytes (useing worst case saving method)");
+//		System.out.println("lzw size total = totalcompressedSize + compresion dictionary Size = "+(totalcompressedSize+dictionary_global.toString().length()));
+//		System.out.print ("estimate compression ratio (lzw size total / totalrawsize ):" + ((totalcompressedSize+dictionary_global.toString().length())*100 / totalrawsize) + "%");
+//		
+//		// Done with the file
+//		br.close();
+//		br = null;
+//		fis = null;
+//
 
 		
 
